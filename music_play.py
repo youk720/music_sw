@@ -2,7 +2,6 @@
 
 import RPi.GPIO as GPIO
 import time
-import vlc
 import os
 import shlex    #文字列を読む(？)
 import subprocess
