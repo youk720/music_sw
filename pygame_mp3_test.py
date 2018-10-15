@@ -36,6 +36,6 @@ while True:
             # 再生の終了
             pygame.mixer.music.stop()
             # break
-            time.sleep(0.3)
-            #戸閉放送用 補足:pygameだとメロディの方とごっちゃになるので別なものを使用
+            time.sleep(1)
+            #戸閉放送用 補足:pygameだとメロディの方とごっちゃになるので別にmpg321を使用
             subprocess.call("mpg321 3_2.mp3", shell=True)
