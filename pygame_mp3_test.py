@@ -5,14 +5,16 @@ import subprocess
 
 sw = 19
 led = 4
+led_2 = 3
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(sw, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(led, GPIO.OUT)
+GPIO.setup(led_2, GPIO.OUT)
 
 # mixerモジュールの初期化
 pygame.mixer.init()
 # メロディ音源の読み込み
-pygame.mixer.music.load("メロディ.mp3")
+pygame.mixer.music.load("farewell - D#m.mp3")
 # time.sleep(60)
 
 while True:
@@ -37,5 +39,7 @@ while True:
             pygame.mixer.music.stop()
             # break
             time.sleep(1)
+            GPIO.output(led_2, GPIO.HIGH)
             #戸閉放送用 補足:pygameだとメロディの方とごっちゃになるので別にmpg321を使用
             subprocess.call("mpg321 3_2.mp3", shell=True)
+            GPIO.output(led_2, GPIO.LOW)
