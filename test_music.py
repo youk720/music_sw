@@ -22,7 +22,7 @@ GPIO.setup(PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 last_pin_status = 0
 
 SONG_DIR = '/home/pi/デスクトップ/gpio_test/music_sw'
-SONG_LIST = ['夏色の時間_Cminus_ノイズ入り高音質.mp3', 'メロディ.mp3']
+SONG_LIST = ['夏色の時間.mp3', 'メロディ.mp3']
 
 
 def play_song():
@@ -30,24 +30,25 @@ def play_song():
     song_path = os.path.join(SONG_DIR, song)
     command = 'aplay %s' % (song_path)
     print(command)
-    subprocess.Popen(shlex.split(command))
+    subprocess.Popen(shlex.split(command)) #実行中にコンソールで入力したように使う
 
-def stop_song():
+# def stop_song():
 
 
-
-while True:
-    pin_status = GPIO.input(PIN)
-    if pin_status == 1:
-        play_song()
-        if is_playing:    # 再生ステータスの検査
-            stop_song()
-        else:
+# try:
+    while True:
+        pin_status = GPIO.input(PIN)
+        if pin_status == 1:
             play_song()
+            if is_playing:    # 再生ステータスの検査
+                stop_song()
+            else:
+                play_song()
 
-        is_playing = not(is_playing)    # 再生ステータスの反転
+            is_playing = not(is_playing)    # 再生ステータスの反転
 
-    last_pin_status = pin_status
-    time.sleep(0.1)
+        last_pin_status = pin_status
+        time.sleep(0.1)
 
-GPIO.cleanup()
+# except KeyboardInterrupt:
+# GPIO.cleanup()
