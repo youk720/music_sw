@@ -15,7 +15,7 @@ GPIO.setup(led_2, GPIO.OUT)
 pygame.mixer.pre_init(44100,-16,2, 1024)
 pygame.mixer.init()
 # メロディ音源の読み込み
-pygame.mixer.music.load("./melody/星空の下.mp3")
+pygame.mixer.music.load("./melody/夏色の時間.mp3")
 # time.sleep(60)
 while True:
     pin_status = GPIO.input(sw)
@@ -34,7 +34,7 @@ while True:
             time.sleep(1)
             GPIO.output(led_2, GPIO.HIGH)
             #戸閉放送用 補足:pygameだとメロディの方とごっちゃになるので別にmpg321を使用
-            subprocess.call("mpg321 4_1.mp3", shell=True)
+            subprocess.call("ffplay -nodisp -autoexit 4_1.mp3", shell=True)
             GPIO.output(led_2, GPIO.LOW)
             # pygame.mixer.quit()
     elif pin_status == 1:
