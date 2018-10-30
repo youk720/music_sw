@@ -17,4 +17,4 @@ def sound():
 while True:
     GPIO.output(led, GPIO.LOW)
     sound()
-    time.sleep(60)
+    time.sleep(120)
