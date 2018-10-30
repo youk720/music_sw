@@ -11,9 +11,9 @@ GPIO.setup(sw, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(led, GPIO.OUT)
 GPIO.setup(led_2, GPIO.OUT)
 
-#melo_time = MP3("./melody/farewell_D#m.mp3")
+melo_time = MP3("./melody/farewell_D#m.mp3")
 # 時間カスタム設定用
-melo_time = 9
+#melo_time = 9
 #door_time = MP3("./2_ドア.mp3")
 # 時間カスタム設定用
 door_time = 6
@@ -29,8 +29,8 @@ while True:
         # print("06")
         if bell == True:
             GPIO.output(led_2, GPIO.HIGH)
-            #melo = subprocess.Popen("ffplay -nodisp -autoexit melody/farewell_D#m.mp3", shell=True)
-            melo = subprocess.Popen("ffplay -nodisp -autoexit https://youk720.github.io/melo_work/melo/%E6%B5%B7%E5%B2%B8%E9%80%9A%E3%82%8AV1.mp3", shell=True)
+            melo = subprocess.Popen("ffplay -nodisp -autoexit melody/farewell_D#m.mp3", shell=True)
+            #melo = subprocess.Popen("ffplay -nodisp -autoexit https://youk720.github.io/melo_work/melo/%E6%B5%B7%E5%B2%B8%E9%80%9A%E3%82%8AV1.mp3", shell=True)
             bell = False
             door_flg = True
             # 鳴らしはじめの時間(秒数)を記録させる
@@ -38,14 +38,12 @@ while True:
         else:
             # 現在の時間(秒数)が melo_time.info.length よりも多くなる場合 melo.kill させる
             now_time = time.time() - melo_start
-            #if now_time > melo_time.info.length or now_time == melo_time.info.length:
+            if now_time > melo_time.info.length or now_time == melo_time.info.length:
             # 時間カスタム設定用
-            if now_time > melo_time:
+            #if now_time > melo_time:
                 melo.kill()
                 print("kill_melo")
                 bell = True
-        # melo.kill()
-        # print("07")
     if pin_status == 0:
         try:
             if door_flg == True:
@@ -62,9 +60,9 @@ while True:
                     door.kill()
                     GPIO.output(led, GPIO.LOW)
                 now_time = time.time() - melo_start
-                #if now_time > melo_time.info.length or now_time == melo_time.info.length:
+                if now_time > melo_time.info.length or now_time == melo_time.info.length:
                # 時間カスタム設定用
-                if now_time > melo_time:
+                #if now_time > melo_time:
                     melo.kill()
                     bell = True
                     GPIO.output(led_2, GPIO.LOW)
