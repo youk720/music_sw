@@ -21,6 +21,7 @@ while True:
     pin_status = GPIO.input(sw)
     time.sleep(0.2)
     # print(pin_status)
+    # スイッチ off
     if pin_status == 0:
         # GPIO.output(led, GPIO.LOW)
         # if 再生処理の有無

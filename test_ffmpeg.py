@@ -15,7 +15,7 @@ GPIO.setup(led_2, GPIO.OUT)
 pygame.mixer.pre_init(44100,-16,2, 1024)
 pygame.mixer.init()
 # メロディ音源の読み込み
-pygame.mixer.music.load("./melody/夏色の時間.mp3")
+pygame.mixer.music.load("./melody/熊谷市歌A.mp3")
 # time.sleep(60)
 while True:
     pin_status = GPIO.input(sw)
