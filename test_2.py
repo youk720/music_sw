@@ -60,14 +60,18 @@ while True:
                 melo.kill()
                 print("kill_melo")
                 bell = True
+    #スイッチがOFFの場合
     if pin_status == 0:
         try:
+             # ベルのフラグの正負で以下を
+             # 先に流れた放送が終わった後一回だけ実行
             if door_flg == True:
                 GPIO.output(led, GPIO.HIGH)
                 # メロディ再生(↓はローカルファイル内での実行時)
                 #door = subprocess.Popen("ffplay -nodisp -autoexit 2_ドア.mp3", shell=True)
                 # メロディ再生(↓はネットからのリンクで再生:この場合、上記のメロディ時間を設定してください)
                 door = subprocess.Popen("ffplay -nodisp -autoexit https://youk720.github.io/melo_work/melo/saki/7_%E6%9C%AA%E6%9B%B4%E6%96%B0voss.mp3", shell=True)
+                # 開始した時間を記録
                 door_start = time.time()
                 door_flg = False
             else:
@@ -76,6 +80,7 @@ while True:
                 #if now_door > door_time.info.length or now_door == door_time.info.length:
                 # 時間カスタム設定用(ネットのリンクから再生時)
                 if now_door > door_time:
+                    # ドア流れ終わったらキル
                     door.kill()
                     GPIO.output(led, GPIO.LOW)
                 now_time = time.time() - melo_start
