@@ -7,8 +7,8 @@ from mutagen.mp3 import MP3
 
 # 各種ピンを指定
 sw = 19
-led = 4
-led_2 = 3
+led = 3
+led_2 = 4
 
 # GPIO関連設定
 GPIO.setmode(GPIO.BCM)

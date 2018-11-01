@@ -7,8 +7,8 @@ from mutagen.mp3 import MP3
 
 # 各種ピンを指定
 sw = 19
-led = 4
-led_2 = 3
+led = 3
+led_2 = 4
 
 # GPIO関連設定
 GPIO.setmode(GPIO.BCM)
@@ -22,8 +22,10 @@ door_time = 7
 
 # フラグやメロディの初期定義
 melo = print("wait")
+now_door = 0
 bell = True
 door_flg = False
+door_play = True
 
 # ここから無限ループ開始
 while True:
@@ -40,7 +42,7 @@ while True:
             #メロディ再生(↓はローカルファイル内での実行時)
             # melo = subprocess.Popen("exec " + "ffplay -nodisp -autoexit -loop /home/pi/デスクトップ/gpio_test/music_sw/melody/farewell_D#m.mp3", shell=True)
             #メロディ再生(↓はネットからのリンクで再生:この場合、上記のメロディ時間を設定してください)
-            melo = subprocess.Popen("exec " + "ffplay -loop 0 -nodisp -autoexit https://youk720.github.io/melo_work/melo/%E5%A4%8F%E8%89%B2%E3%81%AE%E6%99%82%E9%96%93_1.mp3", shell=True)
+            melo = subprocess.Popen("exec " + "ffplay -loop 0 -nodisp -autoexit https://youk720.github.io/melo_work/melo/see%20you%20again.mp3", shell=True)
             # フラグを指定
             bell = False
             door_flg = True
@@ -55,15 +57,19 @@ while True:
                 GPIO.output(led_2, GPIO.LOW)
                 melo.terminate()
                 bell = True
+                if door_play == False:
+                    door.terminate()
+                    door_play = True
                 GPIO.output(led, GPIO.HIGH)
                 # メロディ再生(↓はローカルファイル内での実行時)
                 #door = subprocess.Popen("ffplay -nodisp -autoexit 2_ドア.mp3", shell=True)
                 # メロディ再生(↓はネットからのリンクで再生:この場合、上記のメロディ時間を設定してください)
-                door = subprocess.Popen("exec " + "ffplay -nodisp -autoexit https://youk720.github.io/melo_work/melo/tnk/4%E3%83%88%E3%82%99%E3%82%A2%E9%96%89%20%E6%9B%B4%E6%96%B0.mp3", shell=True)
+                door = subprocess.Popen("exec " + "ffplay -nodisp -autoexit https://youk720.github.io/melo_work/melo/saki/10.mp3", shell=True)
                 #door = subprocess.Popen("exec " + "ffplay -nodisp -autoexit https://youk720.github.io/melo_work/sound/%E3%83%88%E3%82%99%E3%82%A2%E3%81%8B%E3%82%99%E9%96%89%E3%81%BE%E3%82%8A%E3%81%BE%E3%81%99%E6%89%8B%E8%8D%B7%E7%89%A9.mp3", shell=True)
                 # 開始した時間を記録
                 door_start = time.time()
                 door_flg = False
+                door_play = False
             else:
                 now_door = time.time() - door_start
                 # ローカルから時間を定義する場合
