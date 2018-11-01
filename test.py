@@ -16,13 +16,9 @@ GPIO.setup(sw, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(led, GPIO.OUT)
 GPIO.setup(led_2, GPIO.OUT)
 
-# メロディ & 放送時間定義
-# melo_time = MP3("./melody/farewell_D#m.mp3")
-# 時間カスタム設定用(ネットのリンクから再生時)
-melo_time = 9
 #door_time = MP3("./2_ドア.mp3")
 # 時間カスタム設定用(ネットのリンクから再生時)
-door_time = 6
+door_time = 7
 
 # フラグやメロディの初期定義
 melo = print("wait")
@@ -42,24 +38,14 @@ while True:
         if bell == True:
             GPIO.output(led_2, GPIO.HIGH)
             #メロディ再生(↓はローカルファイル内での実行時)
-            # melo = subprocess.Popen("exec " + "ffplay -nodisp -autoexit /home/pi/デスクトップ/gpio_test/music_sw/melody/farewell_D#m.mp3", shell=True)
+            # melo = subprocess.Popen("exec " + "ffplay -nodisp -autoexit -loop /home/pi/デスクトップ/gpio_test/music_sw/melody/farewell_D#m.mp3", shell=True)
             #メロディ再生(↓はネットからのリンクで再生:この場合、上記のメロディ時間を設定してください)
-            melo = subprocess.Popen("exec " + "ffplay -nodisp -autoexit https://youk720.github.io/melo_work/melo/JR-SH3-1.mp3", shell=True)
+            melo = subprocess.Popen("exec " + "ffplay -loop 0 -nodisp -autoexit https://youk720.github.io/melo_work/melo/%E5%A4%8F%E8%89%B2%E3%81%AE%E6%99%82%E9%96%93_1.mp3", shell=True)
             # フラグを指定
             bell = False
             door_flg = True
-            # 鳴らしはじめの時間(秒数)を記録させる
-            melo_start = time.time()
         else:
-            # 現在の時間(秒数)が melo_time.info.length よりも多くなる場合 melo.kill させる
-            now_time = time.time() - melo_start
-            # ローカルから時間を定義する場合
-            # if now_time > melo_time.info.length or now_time == melo_time.info.length:
-            # 時間カスタム設定用(ネットのリンクから再生時)
-            if now_time > melo_time or now_time == melo_time:
-                melo.kill()
-                print("kill_melo")
-                bell = True
+            pass
     #スイッチがOFFの場合
     if pin_status == 0:
         try:
@@ -70,12 +56,11 @@ while True:
                 melo.terminate()
                 bell = True
                 GPIO.output(led, GPIO.HIGH)
-                time.sleep(0.7)
                 # メロディ再生(↓はローカルファイル内での実行時)
                 #door = subprocess.Popen("ffplay -nodisp -autoexit 2_ドア.mp3", shell=True)
                 # メロディ再生(↓はネットからのリンクで再生:この場合、上記のメロディ時間を設定してください)
-                # door = subprocess.Popen("exec " + "ffplay -nodisp -autoexit https://youk720.github.io/melo_work/melo/tnk/3%E3%83%88%E3%82%99%E3%82%A2%E9%96%89%20%E6%9B%B4%E6%96%B0_1.mp3", shell=True)
-                door = subprocess.Popen("exec " + "ffplay -nodisp -autoexit https://youk720.github.io/melo_work/melo/tuda/3_1.mp3", shell=True)
+                door = subprocess.Popen("exec " + "ffplay -nodisp -autoexit https://youk720.github.io/melo_work/melo/tnk/4%E3%83%88%E3%82%99%E3%82%A2%E9%96%89%20%E6%9B%B4%E6%96%B0.mp3", shell=True)
+                #door = subprocess.Popen("exec " + "ffplay -nodisp -autoexit https://youk720.github.io/melo_work/sound/%E3%83%88%E3%82%99%E3%82%A2%E3%81%8B%E3%82%99%E9%96%89%E3%81%BE%E3%82%8A%E3%81%BE%E3%81%99%E6%89%8B%E8%8D%B7%E7%89%A9.mp3", shell=True)
                 # 開始した時間を記録
                 door_start = time.time()
                 door_flg = False
@@ -88,12 +73,5 @@ while True:
                     # ドア流れ終わったらキル
                     door.terminate()
                     GPIO.output(led, GPIO.LOW)
-                now_time = time.time() - melo_start
-                # ローカルから時間を定義する場合
-                # if now_time > melo_time.info.length or now_time == melo_time.info.length:
-               # 時間カスタム設定用(ネットのリンクから再生時)
-                if now_time > melo_time:
-                    melo.kill()
-                    GPIO.output(led_2, GPIO.LOW)
         except:
             pass
