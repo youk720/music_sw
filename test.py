@@ -40,9 +40,9 @@ while True:
         if bell == True:
             GPIO.output(led_2, GPIO.HIGH)
             #メロディ再生(↓はローカルファイル内での実行時)
-            # melo = subprocess.Popen("exec " + "ffplay -nodisp -autoexit -loop /home/pi/デスクトップ/gpio_test/music_sw/melody/farewell_D#m.mp3", shell=True)
+            melo = subprocess.Popen("exec " + "ffplay -nodisp -autoexit -loop 0 /home/pi/デスクトップ/gpio_test/music_sw/melody/営団ブザー.mp3", shell=True)
             #メロディ再生(↓はネットからのリンクで再生:この場合、上記のメロディ時間を設定してください)
-            melo = subprocess.Popen("exec " + "ffplay -loop 0 -nodisp -autoexit https://youk720.github.io/melo_work/melo/see%20you%20again.mp3", shell=True)
+            # melo = subprocess.Popen("exec " + "ffplay -loop 0 -nodisp -autoexit https://youk720.github.io/melo_work/melo/see%20you%20again.mp3", shell=True)
             # フラグを指定
             bell = False
             door_flg = True
@@ -64,8 +64,8 @@ while True:
                 # メロディ再生(↓はローカルファイル内での実行時)
                 #door = subprocess.Popen("ffplay -nodisp -autoexit 2_ドア.mp3", shell=True)
                 # メロディ再生(↓はネットからのリンクで再生:この場合、上記のメロディ時間を設定してください)
-                door = subprocess.Popen("exec " + "ffplay -nodisp -autoexit https://youk720.github.io/melo_work/melo/saki/10.mp3", shell=True)
-                #door = subprocess.Popen("exec " + "ffplay -nodisp -autoexit https://youk720.github.io/melo_work/sound/%E3%83%88%E3%82%99%E3%82%A2%E3%81%8B%E3%82%99%E9%96%89%E3%81%BE%E3%82%8A%E3%81%BE%E3%81%99%E6%89%8B%E8%8D%B7%E7%89%A9.mp3", shell=True)
+                # door = subprocess.Popen("exec " + "ffplay -nodisp -autoexit https://youk720.github.io/melo_work/melo/saki/10.mp3", shell=True)
+                door = subprocess.Popen("exec " + "ffplay -nodisp -autoexit https://youk720.github.io/melo_work/sound/%E3%83%88%E3%82%99%E3%82%A2%E3%81%8B%E3%82%99%E9%96%89%E3%81%BE%E3%82%8A%E3%81%BE%E3%81%99%E6%89%8B%E8%8D%B7%E7%89%A9.mp3", shell=True)
                 # 開始した時間を記録
                 door_start = time.time()
                 door_flg = False
