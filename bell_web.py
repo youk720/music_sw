@@ -2,6 +2,11 @@ import subprocess
 import RPi.GPIO as GPIO
 import time
 
+#参考サイト
+#https://stackoverflow.com/questions/26000336/execute-curl-command-within-a-python-script
+#https://qiita.com/ktanaka117/items/596febd96a63ae1431f8
+#
+
 sw = 19
 
 GPIO.setmode(GPIO.BCM)
