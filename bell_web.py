@@ -13,6 +13,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(sw, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 on_status = True
 off_status = True
+ip = '鯖側のIP書く'
 
 while True:
     pin_status = GPIO.input(sw)
@@ -24,7 +25,7 @@ while True:
                 subprocess.Popen(['curl',
                                  '-X',
                                  'POST',
-                                 'IP',
+                                 '%s' % (ip),
                                  '-H',
                                  'Accept: application/json',
                                  '-H',
@@ -41,7 +42,7 @@ while True:
                 subprocess.Popen(['curl',
                                  '-X',
                                  'POST',
-                                 'IP',
+                                 '%s' % (ip),
                                  '-H',
                                  'Accept: application/json',
                                  '-H',

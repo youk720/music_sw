@@ -41,9 +41,10 @@ while True:
             GPIO.output(led_2, GPIO.HIGH)
             #メロディ再生(↓はローカルファイル内での実行時)
             # melo = subprocess.Popen("exec " + "ffplay -nodisp -autoexit -loop 0 /home/pi/デスクトップ/gpio_test/music_sw/melody/summer_night_v1_Ab.mp3", shell=True)
-            melo = subprocess.Popen("exec " + "ffplay -nodisp -autoexit -loop 0 /home/pi/デスクトップ/gpio_test/music_sw/melody/HANDS-大きな手から小さな手へ-verA.mp3", shell=True)
+            #melo = subprocess.Popen("exec " + "ffplay -nodisp -autoexit -loop 0 /home/pi/デスクトップ/gpio_test/music_sw/melody/HANDS-大きな手から小さな手へ-verA.mp3", shell=True)
             #メロディ再生(↓はネットからのリンクで再生:この場合、上記のメロディ時間を設定してください)
             # melo = subprocess.Popen("exec " + "ffplay -loop 0 -nodisp -autoexit https://youk720.github.io/melo_work/melo/see%20you%20again.mp3", shell=True)
+            melo = subprocess.Popen("exec " + "ffplay -loop 0 -nodisp -autoexit https://youk720.github.io/melo_work/melo/%E5%A4%8F%E8%89%B2%E3%81%AE%E6%99%82%E9%96%93_1.mp3", shell=True)
             # フラグを指定
             bell = False
             door_flg = True
