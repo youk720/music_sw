@@ -36,7 +36,6 @@ while True:
                 off_status = True
         if pin_status == 0:
             #OFFの反応をsubprocessでcurlをmac側へ叩く
-            # subprocess.Popen('curl -X POST http://10.3.100.209:3000 -H "Accept: application/json" -H "Content-type: application/json" -d '{ "sw" : "False" }'', shell=True)
             if off_status == True:
 
                 subprocess.Popen(['curl',
