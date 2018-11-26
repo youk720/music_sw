@@ -19,7 +19,7 @@ on_status = True
 off_status = True
 
 # IPアドレス定義
-ip = 'http://10.3.100.148:3000'
+ip = 'http://xxxxxx:tyyyyy'
 
 # 念の為正常に動作を確認するためログ出す
 print('\n' + "SW Start")
